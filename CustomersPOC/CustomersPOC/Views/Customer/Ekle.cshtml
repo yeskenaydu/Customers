@@ -1,0 +1,28 @@
+﻿@model CustomersPOC.Vievmodel.SehirViewModel
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using(Html.BeginForm("Ekle","Customer",FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Name")
+        @Html.TextBoxFor(m => m.customer.firstName, new { @class = "form-control" })
+        @Html.Label("Surname")
+        @Html.TextBoxFor(m => m.customer.lastName, new { @class = "form-control" })
+        @Html.Label("Mail")
+        @Html.TextBoxFor(m => m.customer.email, new { @class = "form-control" })
+        @Html.Label("Phone")
+        @Html.TextBoxFor(m => m.customer.phone, new { @class = "form-control" })
+        @Html.Label("City")
+        @Html.DropDownListFor(m=>m.customer.cityId, new SelectList(Model.cityId,"cityId","name"),new { @class = "form-control" })
+        @Html.Label("District")
+        @Html.DropDownListFor(m=>m.customer.districtId, new SelectList(Model.districtId,"districtId","name"),new { @class = "form-control" })
+        
+
+    </div>
+    @Html.HiddenFor(m=>m.customer.customerId)
+    <button type="submit" class="btn btn-success">Save</button>
+}
+

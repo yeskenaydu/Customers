@@ -1,0 +1,60 @@
+﻿@using CustomersPOC.Models.EntityFramework
+@model List<customers>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var district = (List<district>)ViewBag.district;
+    var city = (List<city>)ViewBag.city;
+    
+}
+
+<h2>Customers List</h2>
+<a class="btn btn-primary" href="/Customer/Ekle">Add New</a>
+<h1></h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>City</th>
+            <th>District</th>
+            <th>Mail</th>
+            <th>Phone</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var customer in Model)
+        {
+        <tr>
+            <th>@customer.firstName</th>
+            <th>@customer.lastName</th>
+            <th>
+                @foreach (var item in city)
+                {
+                    if (item.cityId == customer.cityId)
+                    {
+                        @item.name
+                    }
+
+                }
+                    </th>
+            <th>@foreach (var item in district)
+            {
+                if(item.districtId==customer.districtId)
+                {
+                    @item.name
+                }
+
+            }
+            </th>
+            <th>@customer.email</th>
+            <th>@customer.phone</th>
+            <th><a class="btn btn-primary" href="/Customer/Guncelle/@customer.customerId">Update</a></th>
+            <th><a class="btn btn-danger" href="/Customer/Sil/@customer.customerId">Delete</a></th>
+        </tr>
+        }
+    </tbody>
+</table>
+
